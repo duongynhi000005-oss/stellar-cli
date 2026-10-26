@@ -49,6 +49,7 @@ impl Emulator {
 }
 
 #[async_trait]
+#[allow(clippy::double_must_use)]
 impl Exchange for Emulator {
     type Error = LedgerZemuError;
     type AnswerType = Vec<u8>;
