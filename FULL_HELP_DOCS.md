@@ -165,6 +165,8 @@ Deploy builtin Soroban Asset Contract
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -490,6 +492,8 @@ If no keys are specified the contract itself is extended.
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -560,6 +564,8 @@ Deploy a wasm contract
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -651,6 +657,8 @@ Derive the contract id for a Wasm contract
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -934,6 +942,8 @@ Install a WASM file to the ledger without creating a contract instance
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -997,6 +1007,8 @@ Install a WASM file to the ledger without creating a contract instance
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -1060,6 +1072,8 @@ stellar contract invoke ... -- --help
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -1168,6 +1182,8 @@ If no keys are specificed the contract itself is restored.
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -1999,6 +2015,8 @@ Transfer tokens from one account to another
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar token transfer-from`
 
@@ -2040,6 +2058,8 @@ Transfer tokens on an owner's behalf using a granted allowance
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar token burn`
 
@@ -2079,6 +2099,8 @@ Burn tokens from an account, destroying them
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar token burn-from`
 
@@ -2119,6 +2141,8 @@ Burn tokens from an owner's account using a granted allowance
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar token balance`
 
@@ -2278,6 +2302,8 @@ Approve an allowance for a spender to transfer on your behalf
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar token allowance`
 
@@ -2351,6 +2377,8 @@ Calls the token's Stellar Asset Contract `mint` function. A non-SAC contract wit
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2398,6 +2426,8 @@ Calls the token's Stellar Asset Contract `clawback` function. A non-SAC contract
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2444,6 +2474,8 @@ Calls the token's Stellar Asset Contract `set_admin` function. A non-SAC contrac
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2494,6 +2526,8 @@ Calls the token's Stellar Asset Contract `set_authorized` function. A non-SAC co
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2650,6 +2684,8 @@ Transfer XLM balance to another account and remove source account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2686,6 +2722,8 @@ Begin sponsoring future reserves for another account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2722,6 +2760,8 @@ Bump sequence number to invalidate older transactions
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2761,6 +2801,8 @@ Create, update, or delete a trustline
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2797,6 +2839,8 @@ Claim a claimable balance by its balance ID
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2835,6 +2879,8 @@ Clawback an asset from an account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2871,6 +2917,8 @@ Clawback a claimable balance by its balance ID
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2910,6 +2958,8 @@ Create and fund a new account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2954,6 +3004,8 @@ Create a claimable balance that can be claimed by specified accounts
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -2993,6 +3045,8 @@ Create a passive sell offer on the Stellar DEX
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3025,6 +3079,8 @@ End sponsoring future reserves
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3070,6 +3126,8 @@ Deposit assets into a liquidity pool
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3109,6 +3167,8 @@ Withdraw assets from a liquidity pool
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3151,6 +3211,8 @@ Create, update, or delete a buy offer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3188,6 +3250,8 @@ Set, modify, or delete account data entries
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3230,6 +3294,8 @@ Create, update, or delete a sell offer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3271,6 +3337,8 @@ Send a payment with a different asset using path finding, specifying the send am
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3312,6 +3380,8 @@ Send a payment with a different asset using path finding, specifying the receive
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3353,6 +3423,8 @@ Send asset to destination account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3395,6 +3467,8 @@ Revoke sponsorship of a ledger entry or signer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3446,6 +3520,8 @@ Set account options like flags, signers, and home domain
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3489,6 +3565,8 @@ Configure authorization and trustline flags for an asset
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3573,6 +3651,8 @@ Transfer XLM balance to another account and remove source account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3614,6 +3694,8 @@ Begin sponsoring future reserves for another account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3655,6 +3737,8 @@ Bump sequence number to invalidate older transactions
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3699,6 +3783,8 @@ Create, update, or delete a trustline
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3740,6 +3826,8 @@ Claim a claimable balance by its balance ID
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3783,6 +3871,8 @@ Clawback an asset from an account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3824,6 +3914,8 @@ Clawback a claimable balance by its balance ID
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3868,6 +3960,8 @@ Create and fund a new account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3917,6 +4011,8 @@ Create a claimable balance that can be claimed by specified accounts
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -3961,6 +4057,8 @@ Create a passive sell offer on the Stellar DEX
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4001,6 +4099,8 @@ End sponsoring future reserves
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4051,6 +4151,8 @@ Deposit assets into a liquidity pool
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4095,6 +4197,8 @@ Withdraw assets from a liquidity pool
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4142,6 +4246,8 @@ Create, update, or delete a buy offer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4184,6 +4290,8 @@ Set, modify, or delete account data entries
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4231,6 +4339,8 @@ Create, update, or delete a sell offer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4277,6 +4387,8 @@ Send a payment with a different asset using path finding, specifying the receive
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4323,6 +4435,8 @@ Send a payment with a different asset using path finding, specifying the send am
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4369,6 +4483,8 @@ Send asset to destination account
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4416,6 +4532,8 @@ Revoke sponsorship of a ledger entry or signer
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4472,6 +4590,8 @@ Set account options like flags, signers, and home domain
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4520,6 +4640,8 @@ Configure authorization and trustline flags for an asset
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 
@@ -4577,6 +4699,8 @@ Sign a transaction envelope appending the signature to the envelope
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ## `stellar tx simulate`
 
@@ -4616,6 +4740,8 @@ Simulate a transaction envelope from stdin
 - `--sign-with-lab` — Sign with https://lab.stellar.org
 - `--sign-with-ledger` — Sign with a ledger wallet
 - `--auto-sign` — Sign without prompting for approval. Only applies to signatures that require user approval, like non-root Soroban auth entries
+- `--signature-expiration-ledger <SIGNATURE_EXPIRATION_LEDGER>` — Absolute ledger sequence number at which Soroban authorization signatures expire. When set, bypasses querying `getLatestLedger` from RPC
+- `--signature-expiration-ledgers <SIGNATURE_EXPIRATION_LEDGERS>` — Relative number of ledgers from `getLatestLedger` after which Soroban authorization signatures expire (default: 60, max: 17280)
 
 ###### **Transaction Options:**
 

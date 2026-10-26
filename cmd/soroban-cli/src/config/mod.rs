@@ -153,9 +153,14 @@ impl Args {
         print: &Print,
     ) -> Result<Option<Transaction>, Error> {
         let network = self.get_network()?;
-        let client = network.rpc_client()?;
-        let latest_ledger = client.get_latest_ledger().await?.sequence;
-        let seq_num = latest_ledger + 60; // ~ 5 min
+        let seq_num = if let Some(explicit_ledger) = self.sign_with.signature_expiration_ledger {
+            explicit_ledger
+        } else {
+            self.sign_with.validated_expiration_offset()?;
+            let client = network.rpc_client()?;
+            let latest_ledger = client.get_latest_ledger().await?.sequence;
+            self.sign_with.compute_expiration_ledger(latest_ledger)?
+        };
         Ok(signer::sign_soroban_authorizations(
             tx,
             signers,
