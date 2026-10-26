@@ -197,6 +197,22 @@ async fn tx_fetch_tx_not_found() {
         .stderr(format!(
             "❌ error: transaction {tx_hash_not_found} not found on testnet network\n"
         ));
+
+    // Also verify when --network is not set and only --rpc-url / --network-passphrase are provided
+    for subcmd in ["envelope", "result", "meta", "fee", "events"] {
+        sandbox
+            .new_assert_cmd("tx")
+            .arg("fetch")
+            .arg(subcmd)
+            .arg("--hash")
+            .arg(&tx_hash_not_found)
+            .env_remove("STELLAR_NETWORK")
+            .assert()
+            .failure()
+            .stderr(format!(
+                "❌ error: transaction {tx_hash_not_found} not found on local network\n"
+            ));
+    }
 }
 
 #[tokio::test]
