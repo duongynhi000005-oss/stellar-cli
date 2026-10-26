@@ -5,14 +5,14 @@ use std::str::FromStr;
 use itertools::Itertools;
 use serde_json::{json, Value};
 use stellar_xdr::{
-    AccountId, BytesM, ContractExecutable, ContractExecutableExternalRef, ContractId,
+    AccountId, BytesM, ContractExecutable, ContractExecutableExternalRef, ContractId, Duration,
     Error as XdrError, Hash, Int128Parts, Int256Parts, MuxedContract, MuxedEd25519Account,
     PublicKey, ScAddress, ScBytes, ScContractInstance, ScMap, ScMapEntry, ScNonceKey, ScSpecEntry,
     ScSpecEventV0, ScSpecFunctionV0, ScSpecTypeDef as ScType, ScSpecTypeMap, ScSpecTypeOption,
     ScSpecTypeResult, ScSpecTypeTuple, ScSpecTypeUdt, ScSpecTypeVec, ScSpecUdtEnumV0,
     ScSpecUdtErrorEnumCaseV0, ScSpecUdtErrorEnumV0, ScSpecUdtStructV0, ScSpecUdtUnionCaseTupleV0,
     ScSpecUdtUnionCaseV0, ScSpecUdtUnionCaseVoidV0, ScSpecUdtUnionV0, ScString, ScSymbol, ScVal,
-    ScVec, StringM, UInt128Parts, UInt256Parts, Uint256, VecM,
+    ScVec, StringM, TimePoint, UInt128Parts, UInt256Parts, Uint256, VecM,
 };
 
 pub mod contract;
@@ -340,7 +340,9 @@ impl Spec {
                 | ScType::Address
                 | ScType::MuxedAddress
                 | ScType::Bytes
-                | ScType::BytesN(_),
+                | ScType::BytesN(_)
+                | ScType::Timepoint
+                | ScType::Duration,
                 _,
             ) => from_json_primitives(v, t)?,
 
@@ -934,10 +936,18 @@ pub fn from_json_primitives(v: &Value, t: &ScType) -> Result<ScVal, Error> {
             n.as_i64()
                 .ok_or_else(|| Error::InvalidValue(Some(t.clone())))?,
         ),
-        (ScType::U64 | ScType::Timepoint | ScType::Duration, Value::Number(n)) => ScVal::U64(
+        (ScType::U64, Value::Number(n)) => ScVal::U64(
             n.as_u64()
                 .ok_or_else(|| Error::InvalidValue(Some(t.clone())))?,
         ),
+        (ScType::Timepoint, Value::Number(n)) => ScVal::Timepoint(TimePoint(
+            n.as_u64()
+                .ok_or_else(|| Error::InvalidValue(Some(t.clone())))?,
+        )),
+        (ScType::Duration, Value::Number(n)) => ScVal::Duration(Duration(
+            n.as_u64()
+                .ok_or_else(|| Error::InvalidValue(Some(t.clone())))?,
+        )),
 
         // Symbol parsing
         (ScType::Symbol, Value::String(s)) => ScVal::Symbol(ScSymbol(
@@ -1551,7 +1561,7 @@ impl Spec {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use stellar_xdr::{Duration, ScMap, ScSpecTypeBytesN, TimePoint};
+    use stellar_xdr::{ScSpecTypeBytesN, ScSpecUdtStructFieldV0};
 
     const CUSTOM_TYPES_WASM: &[u8] =
         include_bytes!("../../../../target/wasm32v1-none/test-wasms/test_custom_types.wasm");
@@ -2683,5 +2693,71 @@ mod tests {
         let spec = Spec::new(&[]);
         let err = spec.find_function("evil\x1b[2J").unwrap_err();
         crate::test_utils::assert_no_control_chars(&format!("{err}"));
+    }
+
+    #[test]
+    fn test_from_json_primitives_timepoint_and_duration() {
+        let tp_val = from_json_primitives(&json!(1_760_501_234_u64), &ScType::Timepoint).unwrap();
+        assert_eq!(tp_val, ScVal::Timepoint(TimePoint(1_760_501_234)));
+
+        let dur_val = from_json_primitives(&json!(3600_u64), &ScType::Duration).unwrap();
+        assert_eq!(dur_val, ScVal::Duration(Duration(3600)));
+    }
+
+    #[test]
+    fn test_nested_timepoint_and_duration_in_struct() {
+        let spec = Spec::new(&[ScSpecEntry::UdtStructV0(ScSpecUdtStructV0 {
+            doc: StringM::default(),
+            lib: StringM::default(),
+            name: "TimedAction".try_into().unwrap(),
+            fields: vec![
+                ScSpecUdtStructFieldV0 {
+                    doc: StringM::default(),
+                    name: "deadline".try_into().unwrap(),
+                    type_: ScType::Timepoint,
+                },
+                ScSpecUdtStructFieldV0 {
+                    doc: StringM::default(),
+                    name: "ttl".try_into().unwrap(),
+                    type_: ScType::Duration,
+                },
+                ScSpecUdtStructFieldV0 {
+                    doc: StringM::default(),
+                    name: "name".try_into().unwrap(),
+                    type_: ScType::Symbol,
+                },
+            ]
+            .try_into()
+            .unwrap(),
+        })]);
+
+        let udt_type = ScType::Udt(ScSpecTypeUdt {
+            name: "TimedAction".try_into().unwrap(),
+        });
+        let parsed = spec
+            .from_string(
+                r#"{"deadline": 1760501234, "ttl": 3600, "name": "test"}"#,
+                &udt_type,
+            )
+            .unwrap();
+
+        let expected = ScVal::Map(Some(
+            ScMap::sorted_from(vec![
+                ScMapEntry {
+                    key: ScVal::Symbol("deadline".try_into().unwrap()),
+                    val: ScVal::Timepoint(TimePoint(1_760_501_234)),
+                },
+                ScMapEntry {
+                    key: ScVal::Symbol("name".try_into().unwrap()),
+                    val: ScVal::Symbol("test".try_into().unwrap()),
+                },
+                ScMapEntry {
+                    key: ScVal::Symbol("ttl".try_into().unwrap()),
+                    val: ScVal::Duration(Duration(3600)),
+                },
+            ])
+            .unwrap(),
+        ));
+        assert_eq!(parsed, expected);
     }
 }
