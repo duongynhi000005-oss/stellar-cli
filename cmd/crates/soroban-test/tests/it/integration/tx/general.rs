@@ -242,6 +242,41 @@ async fn txn_hash() {
         .stdout_as_str();
 
     assert_eq!(hash.trim(), expected_hash);
+
+    let TransactionEnvelope::Tx(inner_v1) =
+        TransactionEnvelope::from_xdr_base64(xdr_base64, Limits::none()).unwrap()
+    else {
+        panic!("expected v1 transaction envelope");
+    };
+    let fee_bump = soroban_cli::xdr::FeeBumpTransaction {
+        fee_source: inner_v1.tx.source_account.clone(),
+        fee: 10_000,
+        inner_tx: soroban_cli::xdr::FeeBumpTransactionInnerTx::Tx(inner_v1),
+        ext: soroban_cli::xdr::FeeBumpTransactionExt::V0,
+    };
+    let expected_fee_bump_hash = hex::encode(
+        soroban_cli::utils::fee_bump_transaction_hash(
+            &fee_bump,
+            &sandbox.network.network_passphrase,
+        )
+        .unwrap(),
+    );
+    let fee_bump_env =
+        TransactionEnvelope::TxFeeBump(soroban_cli::xdr::FeeBumpTransactionEnvelope {
+            tx: fee_bump,
+            signatures: soroban_cli::xdr::VecM::default(),
+        });
+    let fee_bump_xdr = fee_bump_env.to_xdr_base64(Limits::none()).unwrap();
+
+    let fee_bump_hash = sandbox
+        .new_assert_cmd("tx")
+        .arg("hash")
+        .write_stdin(fee_bump_xdr.as_bytes())
+        .assert()
+        .success()
+        .stdout_as_str();
+
+    assert_eq!(fee_bump_hash.trim(), expected_fee_bump_hash);
 }
 
 #[tokio::test]
