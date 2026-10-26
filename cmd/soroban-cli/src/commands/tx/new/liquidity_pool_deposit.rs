@@ -1,5 +1,6 @@
 use clap::Parser;
 
+use super::revoke_sponsorship::parse_liquidity_pool_id;
 use crate::{commands::tx, tx::builder, xdr};
 
 #[derive(Parser, Debug, Clone)]
@@ -71,9 +72,7 @@ impl TryFrom<&Cmd> for xdr::OperationBody {
                 },
         }: &Cmd,
     ) -> Result<Self, Self::Error> {
-        let pool_id: xdr::PoolId = liquidity_pool_id
-            .parse()
-            .map_err(|_| tx::args::Error::InvalidPoolId(liquidity_pool_id.clone()))?;
+        let pool_id = parse_pool_id(liquidity_pool_id)?;
 
         let min_price_parsed = parse_price(min_price)?;
         let max_price_parsed = parse_price(max_price)?;
@@ -87,5 +86,50 @@ impl TryFrom<&Cmd> for xdr::OperationBody {
                 max_price: max_price_parsed,
             },
         ))
+    }
+}
+
+pub(super) fn parse_pool_id(liquidity_pool_id: &str) -> Result<xdr::PoolId, tx::args::Error> {
+    let pool_id_bytes = parse_liquidity_pool_id(liquidity_pool_id)
+        .map_err(|_| tx::args::Error::InvalidPoolId(liquidity_pool_id.to_string()))?;
+    let pool_id_array: [u8; 32] = pool_id_bytes
+        .try_into()
+        .map_err(|_| tx::args::Error::InvalidPoolId(liquidity_pool_id.to_string()))?;
+    Ok(xdr::PoolId(xdr::Hash(pool_id_array)))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_pool_id_hex_64() {
+        let hex_id = "001041ac1d61419a62e0c0152e59f13aff7f8f65c2f04c1371ebbc662b31f4ab";
+        let pool_id = parse_pool_id(hex_id).unwrap();
+        assert_eq!(hex::encode(pool_id.0 .0), hex_id);
+    }
+
+    #[test]
+    fn test_parse_pool_id_api_prefix_72() {
+        let hex_id = "001041ac1d61419a62e0c0152e59f13aff7f8f65c2f04c1371ebbc662b31f4ab";
+        let api_id = format!("00000000{hex_id}");
+        let pool_id = parse_pool_id(&api_id).unwrap();
+        assert_eq!(hex::encode(pool_id.0 .0), hex_id);
+    }
+
+    #[test]
+    fn test_parse_pool_id_strkey() {
+        let hex_id = "001041ac1d61419a62e0c0152e59f13aff7f8f65c2f04c1371ebbc662b31f4ab";
+        let bytes: [u8; 32] = hex::decode(hex_id).unwrap().try_into().unwrap();
+        let strkey =
+            stellar_strkey::Strkey::LiquidityPool(stellar_strkey::LiquidityPool(bytes)).to_string();
+        let pool_id = parse_pool_id(&strkey).unwrap();
+        assert_eq!(pool_id.0 .0, bytes);
+    }
+
+    #[test]
+    fn test_parse_pool_id_invalid() {
+        let err = parse_pool_id("invalid_pool_id").unwrap_err();
+        assert!(matches!(err, tx::args::Error::InvalidPoolId(_)));
     }
 }

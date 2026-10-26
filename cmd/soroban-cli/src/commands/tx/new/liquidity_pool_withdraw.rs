@@ -1,5 +1,6 @@
 use clap::Parser;
 
+use super::liquidity_pool_deposit::parse_pool_id;
 use crate::{commands::tx, tx::builder, xdr};
 
 #[derive(Parser, Debug, Clone)]
@@ -44,9 +45,7 @@ impl TryFrom<&Cmd> for xdr::OperationBody {
                 },
         }: &Cmd,
     ) -> Result<Self, Self::Error> {
-        let pool_id: xdr::PoolId = liquidity_pool_id
-            .parse()
-            .map_err(|_| tx::args::Error::InvalidPoolId(liquidity_pool_id.clone()))?;
+        let pool_id = parse_pool_id(liquidity_pool_id)?;
 
         Ok(xdr::OperationBody::LiquidityPoolWithdraw(
             xdr::LiquidityPoolWithdrawOp {
@@ -56,5 +55,19 @@ impl TryFrom<&Cmd> for xdr::OperationBody {
                 min_amount_b: min_amount_b.into(),
             },
         ))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_withdraw_accepts_hex_and_strkey_pool_id() {
+        let hex_id = "001041ac1d61419a62e0c0152e59f13aff7f8f65c2f04c1371ebbc662b31f4ab";
+        let from_hex = parse_pool_id(hex_id).unwrap();
+        let strkey = from_hex.to_string();
+        let from_strkey = parse_pool_id(&strkey).unwrap();
+        assert_eq!(from_hex, from_strkey);
     }
 }

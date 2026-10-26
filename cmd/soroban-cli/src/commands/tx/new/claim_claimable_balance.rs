@@ -1,5 +1,6 @@
 use clap::Parser;
 
+use super::clawback_claimable_balance::parse_balance_id;
 use crate::{commands::tx, xdr};
 
 #[derive(Parser, Debug, Clone)]
@@ -27,18 +28,7 @@ impl TryFrom<&Cmd> for xdr::OperationBody {
             op: Args { balance_id },
         }: &Cmd,
     ) -> Result<Self, Self::Error> {
-        let balance_id_bytes =
-            hex::decode(balance_id).map_err(|_| tx::args::Error::InvalidHex {
-                name: "balance-id".to_string(),
-                hex: balance_id.clone(),
-            })?;
-
-        if balance_id_bytes.len() != 32 {
-            return Err(tx::args::Error::InvalidHex {
-                name: "balance-id".to_string(),
-                hex: balance_id.clone(),
-            });
-        }
+        let balance_id_bytes = parse_balance_id(balance_id)?;
 
         let mut balance_id_array = [0u8; 32];
         balance_id_array.copy_from_slice(&balance_id_bytes);
@@ -95,7 +85,27 @@ mod tests {
     #[test]
     fn test_invalid_balance_id_not_hex() {
         let balance_id = "not_hex_characters_here_not_valid_at_all_exactly_64_chars";
-        let result = hex::decode(balance_id);
+        let result = parse_balance_id(balance_id);
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_claim_accepts_strkey_and_api_prefix_balance_id() {
+        let strkey_id = "BAAMLBZI42AD52HKGIZOU7WFVZM6BPEJCLPL44QU2AT6TY3P57I5QDNYIA";
+        let expected_hex = "c58728e6803ee8ea3232ea7ec5ae59e0bc8912debe7214d027e9e36fefd1d80d";
+        let api_id = format!("00000000{expected_hex}");
+
+        assert_eq!(
+            hex::encode(parse_balance_id(strkey_id).unwrap()),
+            expected_hex
+        );
+        assert_eq!(
+            hex::encode(parse_balance_id(&api_id).unwrap()),
+            expected_hex
+        );
+        assert_eq!(
+            hex::encode(parse_balance_id(expected_hex).unwrap()),
+            expected_hex
+        );
     }
 }

@@ -51,7 +51,7 @@ pub struct Args {
     pub signer_key: Option<address::UnresolvedMuxedAccount>,
 }
 
-fn parse_liquidity_pool_id(pool_id: &str) -> Result<Vec<u8>, tx::args::Error> {
+pub fn parse_liquidity_pool_id(pool_id: &str) -> Result<Vec<u8>, tx::args::Error> {
     // Handle multiple formats:
     // 1. Address format (base32): LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     // 2. API format with type prefix (72 hex chars): 000000006f2179b3...
