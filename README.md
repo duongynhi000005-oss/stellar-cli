@@ -10,6 +10,7 @@ This repo is home to the Stellar CLI, the command-line multi-tool for running an
 - [Cookbook](#cookbook)
 - [Install](#install)
 - [Autocomplete](#autocomplete)
+- [Security & RPC Trust Boundary](#security--rpc-trust-boundary)
 - [Latest Release](#latest-release)
 - [Upcoming Features](#upcoming-features)
 - [To Contribute](#to-contribute)
@@ -109,6 +110,27 @@ To enable autocomplete permanently, run:
 ```bash
 echo "source <(stellar completion --shell bash)" >> ~/.bashrc
 ```
+
+## Security & RPC Trust Boundary
+
+The Stellar CLI treats the configured Soroban RPC endpoint (`--rpc-url` / `STELLAR_RPC_URL` or the selected `--network` preset) as a **trusted component**:
+
+- **Transaction simulation & authorization entries**: When invoking or deploying contracts, the CLI calls `simulateTransaction` on the RPC endpoint and constructs the transaction footprint, resource fee, and Soroban authorization entries (`SorobanAuthorizedEntry`) from the simulation response before signing.
+- **Signature expiration window**: When signing Soroban authorization entries, the CLI queries `getLatestLedger` from the RPC endpoint and derives `signature_expiration_ledger` from the reported ledger sequence (`latest_ledger + 60`).
+- **Account sequence numbers**: When assembling transactions, the CLI fetches the source account's current sequence number from the RPC endpoint.
+
+### Implications of Untrusted or Plain-HTTP Endpoints
+
+Pointing the CLI at an untrusted, compromised, or unencrypted (`http://`) RPC endpoint allows the endpoint operator or an on-path attacker to:
+
+1. **Manipulate simulated authorization payloads**: Return crafted contract invocations, arguments, or sub-invocations in `simulateTransaction` that may be signed if `--auto-sign` is used or if prompts are not carefully inspected.
+2. **Skew signature expiration windows**: Report an artificially high or stale ledger sequence in `getLatestLedger`, extending or invalidating the `signature_expiration_ledger` validity window of signed authorization entries.
+3. **Observe or tamper with traffic in transit**: Plain-HTTP connections expose transaction payloads, account addresses, and simulation results to network eavesdropping and man-in-the-middle modification.
+
+### Recommendations
+
+- **Use trusted RPC endpoints over TLS (`https://`)**: Always connect to RPC endpoints you operate or explicitly trust, and prefer `https://` URLs with valid TLS certificates for Testnet, Futurenet, and Mainnet operations (reserve `http://` strictly for local development containers on `localhost` / `127.0.0.1`).
+- **Review authorization prompts before signing**: Avoid passing `--auto-sign` when interacting with non-local networks, and verify the contract address, function name, arguments, and expiration ledger before approving hardware wallet or local key signatures.
 
 ## Latest Release
 
