@@ -395,6 +395,12 @@ impl Spec {
                                 .ok_or_else(|| Error::MissingKey(sanitize(&key)))
                         })
                         .collect::<Result<Vec<_>, _>>()?;
+                    if map.len() != strukt.fields.len() {
+                        return Err(Error::InvalidUdtValue {
+                            name: sanitize(name),
+                            value: sanitize(&value.to_string()),
+                        });
+                    }
                     self.parse_tuple_strukt(strukt, &values)
                 } else {
                     self.parse_strukt(strukt, map)
@@ -424,6 +430,12 @@ impl Spec {
         strukt: &ScSpecUdtStructV0,
         array: &[Value],
     ) -> Result<ScVal, Error> {
+        if array.len() != strukt.fields.len() {
+            return Err(Error::InvalidUdtValue {
+                name: sanitize(&strukt.name.to_utf8_string_lossy()),
+                value: sanitize(&Value::Array(array.to_vec()).to_string()),
+            });
+        }
         let items = strukt
             .fields
             .to_vec()
@@ -2683,5 +2695,27 @@ mod tests {
         let spec = Spec::new(&[]);
         let err = spec.find_function("evil\x1b[2J").unwrap_err();
         crate::test_utils::assert_no_control_chars(&format!("{err}"));
+    }
+
+    #[test]
+    fn tuple_struct_array_wrong_arity_errors_instead_of_truncating_or_accepting() {
+        // Regression for https://github.com/stellar/stellar-cli/issues/2748:
+        // a tuple struct given a JSON array with too many, too few, or zero
+        // elements must return an error rather than silently dropping extra
+        // elements or emitting a partial ScVal::Vec.
+        let spec = get_custom_types_spec();
+        let type_ = &spec.find_function("tuple_strukt").unwrap().inputs[0].type_;
+        for bad in [
+            r"[]",
+            r#"[{"a":1,"b":true,"c":"hello"}]"#,
+            r#"[{"a":1,"b":true,"c":"hello"},"Second","extra"]"#,
+            r#"{"0":{"a":1,"b":true,"c":"hello"},"1":"Second","2":"extra"}"#,
+        ] {
+            let err = spec.from_string(bad, type_).unwrap_err();
+            assert!(
+                matches!(err, Error::InvalidUdtValue { .. }),
+                "input {bad}: got {err:?}"
+            );
+        }
     }
 }
