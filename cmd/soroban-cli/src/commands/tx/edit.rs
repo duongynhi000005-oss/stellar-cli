@@ -1,7 +1,7 @@
 use std::{
     env,
     fs::{self},
-    io::{stdin, Cursor, IsTerminal},
+    io::{stdin, Cursor, IsTerminal, Read},
     path::PathBuf,
     process::{self},
 };
@@ -48,7 +48,7 @@ impl Cmd {
             default_json()
         } else {
             let mut input = String::new();
-            stdin().read_line(&mut input)?;
+            stdin().read_to_string(&mut input)?;
             let input = input.trim();
             xdr_to_json::<stellar_xdr::TransactionEnvelope>(input)?
         };
@@ -150,7 +150,11 @@ fn xdr_to_json<T>(xdr_string: &str) -> Result<String, Error>
 where
     T: stellar_xdr::ReadXdr + serde::Serialize,
 {
-    let tx = T::from_xdr_base64(xdr_string, stellar_xdr::Limits::depth(XDR_DEPTH_LIMIT))?;
+    let mut lim = stellar_xdr::Limited::new(
+        super::xdr::SkipWhitespace::new(xdr_string.as_bytes()),
+        stellar_xdr::Limits::depth(XDR_DEPTH_LIMIT),
+    );
+    let tx = T::read_xdr_base64_to_end(&mut lim)?;
     let mut schema: serde_json::Value = serde_json::to_value(tx)?;
     schema["$schema"] = json!(schema_url());
     let json = serde_json::to_string_pretty(&schema)?;
@@ -233,5 +237,22 @@ mod tests {
         let dir_meta = fs::metadata(temp_dir.path()).expect("dir metadata failed");
         let dir_mode = dir_meta.permissions().mode() & 0o777;
         assert_eq!(dir_mode, 0o700, "tempdir permissions should be 0o700");
+    }
+
+    #[test]
+    fn xdr_to_json_accepts_multiline_wrapped_base64() {
+        let single_line = "AAAAAgAAAACYBFySPwzWk0YGRnApY9uHkYcuA63OEUJfPCHS15r6LgAAAGQAS7YyAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAAltWKzUF0DSf6FJTJjnjOMD4PvqdD4llwfRAPBJ8Q25AAAAAAAAAAAAAAABAAAAAAAAAAA=";
+        let wrapped_lf = "AAAAAgAAAACYBFySPwzWk0YGRnApY9uHkYcuA63OEUJfPCHS15r6LgAAAGQAS7YyAAAAAwAAAAAA\nAAAAAAAAAQAAAAAAAAABAAAAAAltWKzUF0DSf6FJTJjnjOMD4PvqdD4llwfRAPBJ8Q25AAAAAAAA\nAAAAAAABAAAAAAAAAAA=\n";
+        let wrapped_crlf = "AAAAAgAAAACYBFySPwzWk0YGRnApY9uHkYcuA63OEUJfPCHS15r6LgAAAGQAS7YyAAAAAwAAAAAA\r\nAAAAAAAAAQAAAAAAAAABAAAAAAltWKzUF0DSf6FJTJjnjOMD4PvqdD4llwfRAPBJ8Q25AAAAAAAA\r\nAAAAAAABAAAAAAAAAAA=\r\n";
+
+        let expected = xdr_to_json::<stellar_xdr::TransactionEnvelope>(single_line)
+            .expect("single-line XDR should decode");
+        let got_lf = xdr_to_json::<stellar_xdr::TransactionEnvelope>(wrapped_lf)
+            .expect("LF-wrapped XDR should decode");
+        let got_crlf = xdr_to_json::<stellar_xdr::TransactionEnvelope>(wrapped_crlf)
+            .expect("CRLF-wrapped XDR should decode");
+
+        assert_eq!(got_lf, expected);
+        assert_eq!(got_crlf, expected);
     }
 }
