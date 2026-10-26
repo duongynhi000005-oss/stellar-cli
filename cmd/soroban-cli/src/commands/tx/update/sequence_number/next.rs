@@ -68,9 +68,38 @@ impl Cmd {
             .verify_network_passphrase(Some(&network.network_passphrase))
             .await?;
 
-        let address = tx_source_acct.to_string();
+        let address = source_account_address(tx_source_acct);
 
         let account = client.get_account(&address).await?;
         Ok(*account.seq_num.as_ref())
+    }
+}
+
+fn source_account_address(tx_source_acct: &MuxedAccount) -> String {
+    tx_source_acct.clone().account_id().to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::str::FromStr;
+
+    #[test]
+    fn source_account_address_for_ed25519_returns_g_address() {
+        let g_addr = "GD2B52NO66LDB7V745JLNTTWNHBSQJDY3GODG36E6JLUX4F5MMVPSB4H";
+        let acct = MuxedAccount::from_str(g_addr).unwrap();
+        assert_eq!(source_account_address(&acct), g_addr);
+    }
+
+    #[test]
+    fn source_account_address_for_muxed_account_returns_underlying_g_address() {
+        let g_addr = "GD2B52NO66LDB7V745JLNTTWNHBSQJDY3GODG36E6JLUX4F5MMVPSB4H";
+        let m_addr = "MD2B52NO66LDB7V745JLNTTWNHBSQJDY3GODG36E6JLUX4F5MMVPSAAAAAAAAAAAPPTC4";
+        let muxed = MuxedAccount::from_str(m_addr).unwrap();
+        assert!(matches!(muxed, MuxedAccount::MuxedEd25519(_)));
+
+        let resolved = source_account_address(&muxed);
+        assert_eq!(resolved, g_addr);
+        assert!(stellar_strkey::ed25519::PublicKey::from_string(&resolved).is_ok());
     }
 }

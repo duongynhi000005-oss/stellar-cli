@@ -223,6 +223,38 @@ async fn sequence_number_next() {
         tx.seq_num,
         soroban_cli::xdr::SequenceNumber(test_account_seq_num + 1)
     );
+
+    // Also verify when the transaction source is a muxed (M...) account
+    let mut muxed_tx = tx.clone();
+    let soroban_cli::xdr::AccountId(soroban_cli::xdr::PublicKey::PublicKeyTypeEd25519(ed25519)) =
+        muxed_tx.source_account.account_id();
+    muxed_tx.source_account =
+        soroban_cli::xdr::MuxedAccount::MuxedEd25519(soroban_cli::xdr::MuxedAccountMed25519 {
+            id: 123,
+            ed25519,
+        });
+    muxed_tx.seq_num = soroban_cli::xdr::SequenceNumber(0);
+    let muxed_env: TransactionEnvelope = muxed_tx.into();
+    let muxed_base64 = muxed_env.to_xdr_base64(Limits::none()).unwrap();
+
+    let updated_muxed_tx = sandbox
+        .new_assert_cmd("tx")
+        .arg("update")
+        .arg("seq-num")
+        .arg("next")
+        .write_stdin(muxed_base64.as_bytes())
+        .assert()
+        .success()
+        .stdout_as_str();
+
+    let updated_muxed_env =
+        TransactionEnvelope::from_xdr_base64(&updated_muxed_tx, Limits::none()).unwrap();
+    let updated_muxed_inner =
+        soroban_cli::commands::tx::xdr::unwrap_envelope_v1(updated_muxed_env).unwrap();
+    assert_eq!(
+        updated_muxed_inner.seq_num,
+        soroban_cli::xdr::SequenceNumber(test_account_seq_num + 1)
+    );
 }
 
 #[tokio::test]
